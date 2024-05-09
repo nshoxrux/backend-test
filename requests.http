@@ -1,0 +1,109 @@
+### 1. Создать пользователя и указать его баланс
+POST http://localhost:4000/api/users/create
+
+Content-Type: application/json
+
+{
+    "balance": 1000
+}
+
+// Пример успешного ответа
+{
+    "message": "User was successfully created"
+}
+
+// Пример неуспешного ответа
+{
+    "status": 400,
+    "message": "User's balance field must be typeof number"
+}
+
+--------------
+
+### 2. Получить список всех пользователей
+GET http://localhost:4000/api/users
+
+// Пример успешного ответа
+[
+  {
+    "id": 3,
+    "balance": 1000
+  },
+  {
+    "id": 2,
+    "balance": 800
+  },
+  {
+    "id": 4,
+    "balance": 830
+  }
+]
+
+// Пример неуспешного ответа
+{
+    "status": 404,
+    "message": "User was not found"
+}
+
+-------------------
+
+### 3. Получить список всех товаров
+GET http://localhost:4000/api/items
+
+// Пример успешного ответа
+[
+  {
+    "market_hash_name": "AK-47 | Aquamarine Revenge (Battle-Scarred)",
+    "currency": "EUR",  
+    "suggested_price": 13.18,
+    "item_page": "https://skinport.com/item/csgo/ak-47-aquamarine-revenge-battle-scarred",
+    "market_page": "https://skinport.com/market/730?cat=Rifle&item=Aquamarine+Revenge",
+    "min_price": 11.33,
+    "max_price": 18.22,
+    "mean_price": 12.58,
+    "quantity": 25,
+    "created_at": 1535988253,
+    "updated_at": 1568073728
+  },
+  {
+    "market_hash_name": "★ M9 Bayonet | Fade (Factory New)",
+    "currency": "EUR",
+    "suggested_price": 319.11,
+    "item_page": "https://skinport.com/item/csgo/m9-bayonet-fade-factory-new",
+    "market_page": "https://skinport.com/market/730?cat=Knife&item=Fade",
+    "min_price": null,
+    "max_price": null,
+    "mean_price": null,
+    "quantity": 0,
+    "created_at": 1535988302,
+    "updated_at": 1568073725
+  }
+]
+
+// Пример неуспешного ответа
+{
+    "status": 429,
+    "message": "Rate limit exceeded"
+}
+
+-------------------
+
+### 4. Списать деньги с карты пользователя
+PATCH http://localhost:4000/api/users/2/debit
+
+Content-Type: application/json
+
+{
+    "amount": 100
+}
+
+// Пример успешного ответа
+{
+    "message": "Balance debited successfully"
+}
+
+// Пример неуспешного ответа
+{
+    "status": 400,
+    "message": "Insufficient funds"
+}
